@@ -1,0 +1,62 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Components.Forms
+@using iText.Kernel.Pdf
+
+
+<h1>PDF Metadata Viewer</h1>
+
+<InputFile OnChange="LoadPdf" accept=".pdf"></InputFile>
+
+@if (!string.IsNullOrEmpty(FileName))
+{
+    <p><strong>File:</strong> @FileName</p>
+
+    <ul>
+        <li><strong>Title:</strong> @Title</li>
+        <li><strong>Author:</strong> @Author</li>
+        <li><strong>Subejct:</strong> @Subject</li>
+        <li><strong>Keywords:</strong> @Keywords</li>
+        <li><strong>Taggewd PDF:</strong> @IsTagged</li>
+    </ul>
+}
+
+@code {
+    string FileName = "";
+    string Title = "";
+    string Author = "";
+    string Subject = "";
+    string Keywords = "";
+    string IsTagged = "Unknown";
+
+    private async Task LoadPdf(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        FileName = file.Name;
+
+        using var stream = file.OpenReadStream(10 * 1024 * 1024);
+        using var ms = new MemoryStream();
+
+        await stream.CopyToAsync(ms);
+
+        try
+        {
+            using var reader = new PdfReader(new MemoryStream(ms.ToArray()));
+            using var pdfDoc = new PdfDocument(reader);
+            var info = pdfDoc.GetDocumentInfo();
+
+            Title = info.GetTitle() ?? "N/A";
+            Author = info.GetAuthor() ?? "N/A";
+            Subject = info.GetSubject() ?? "N/A";
+            Keywords = info.GetKeywords() ?? "N/A";
+
+            IsTagged = pdfDoc.IsTagged() ? "Yes" : "No";
+        }
+        catch (Exception ex)
+        {
+            Title = Author = Subject = Keywords = "Error reading PDF";
+            IsTagged = $"ERROR: {ex.Message}";
+        }
+    }
+
+}
+

@@ -1,0 +1,89 @@
+# Compiled Object Code and Libraries (.dll, .pdb, .exe)
+[Oo]bj/
+[Bb]in/
+
+# User-specific files (e.g., Visual Studio user options)
+*.suo
+*.user
+*.userprefs
+*.vs/
+*.ptvs.vsconfig
+*.code-workspace
+
+# Tooling artifacts
+.editorconfig.lock
+*.csproj.nuget.*
+project.razor.bin
+
+# NuGet Packages
+packages/
+*.nupkg
+*.snupkg
+
+# Test Results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+Report.html
+
+# Build Output
+publish/
+_framework/ // Blazor Hybrid specific output
+
+# Blazor Client-Side Specific (if applicable and separate)
+wwwroot/_content/
+.publish/
+
+# Blazor Server-Side Specific (if applicable and separate)
+# If your server-side has its own node_modules (unlikely for pure Blazor Server)
+# node_modules/
+
+# Mobile Specific (if using MAUI/Xamarin)
+*.apk
+*.ipa
+*.xcscheme
+*.pbxproj
+*.mode1v3
+*.mode2v3
+*.xcuserstate
+project.lock.json
+out/
+GeneratedArtifacts/
+
+# Android Specific
+*.csproj.user
+*.vssettings
+/Properties/AndroidManifest.xml
+/Resources/values/styles.xml
+/Assets/
+
+# iOS Specific
+/Info.plist
+/Entitlements.plist
+
+# macOS Specific
+*.app
+
+# Linux Specific
+# (Add any specific build artifacts or temporary files)
+
+# Temporary files and logs
+*.log
+*.tmp
+*.cache
+.DS_Store # macOS folder metadata
+
+# Environment specific files (consider if you want to track these)
+# appsettings.Development.json
+# usersecrets.json
+
+# JetBrains Rider specific files
+.idea/
+
+# Other IDE or tool specific files
+# (Add as needed)
+
+# iText 7 specific (potential temporary files or outputs)
+*.pdf.tmp*
+*.itext7-temp*
